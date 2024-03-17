@@ -1,0 +1,42 @@
+name: pregnancy_navigator_95
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  cupertino_icons: ^1.0.6
+  flutter_screenutil: ^5.9.0
+  shared_preferences: ^2.0.15
+  webview_flutter: ^4.4.2
+  smooth_page_indicator: ^1.1.0
+  in_app_review: ^2.0.6
+  cached_network_image: ^3.3.1
+  pedometer: ^4.0.1
+  adapty_flutter: ^2.9.0
+  share_plus: ^7.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^3.0.0
+
+flutter:
+
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
