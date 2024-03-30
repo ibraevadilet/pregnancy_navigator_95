@@ -45,7 +45,9 @@ class TrackerModel {
   final String trimesterDescription;
   final String week;
   final String weekDescription;
+  final String? link;
   TrackerModel({
+    this.link,
     required this.image,
     required this.fruit,
     required this.length,
@@ -68,6 +70,8 @@ List<TrackerModel> get trackerData => [
         week: '1st week',
         weekDescription:
             "During the first week of the menstrual cycle and prospective pregnancy, an oocyte begins maturing in the ovary, ready to meet a sperm. Meanwhile, the woman focuses on daily activities, anticipating the end of her period—the shedding of the uterine wall's functional layer unused in the previous cycle.",
+        link:
+            'https://kidshealth.org/en/parents/pregnancy-calendar-intro.html#:~:text=A%20pregnancy%20is%20divided%20into,the%20end%20of%20the%20pregnancy',
       ),
       TrackerModel(
         image: 'https://i.ibb.co/BZKfYv7/cinnamon.png',
