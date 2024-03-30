@@ -9,8 +9,8 @@ late final SharedPreferences prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await Dfsdfasdfaafas().sdgdgbfhdsg();
   prefs = await SharedPreferences.getInstance();
+  await Dfsdfasdfaafas().sdgdgbfhdsg();
   runApp(const PrNavigatorApp());
 }
 
