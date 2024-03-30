@@ -97,7 +97,18 @@ class _Nav5ScreenState extends State<Nav5Screen> {
               ],
             ),
           ),
-        SizedBox(height: 24.h),
+        if (isPremium)
+          Text(
+            'This application serves for entertainment and informative purposes. For accurate and verified information, contact your doctor.',
+            style: TextStyle(
+              fontSize: 15.sp,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+            ),
+          ),
+        if (isPremium) SizedBox(height: 16.h),
+        if (!isPremium) SizedBox(height: 24.h),
         SettingsContainers(
           title: 'Terms of Use',
           onTap: () {

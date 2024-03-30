@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pregnancy_navigator_95/helpers/tracker_model_data.dart';
 import 'package:pregnancy_navigator_95/screens/nav5_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Nav1Screen extends StatefulWidget {
   const Nav1Screen({super.key});
@@ -34,6 +36,7 @@ class _Nav1ScreenState extends State<Nav1Screen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     tabController = TabController(
       initialIndex: 0,
       length: 40,
@@ -42,6 +45,7 @@ class _Nav1ScreenState extends State<Nav1Screen> with TickerProviderStateMixin {
         currantIndex = tabController.index;
         setState(() {});
       });
+    alertDialog(context);
   }
 
   @override
@@ -334,8 +338,99 @@ class _TrackerInfoWidgetState extends State<TrackerInfoWidget> {
               ),
             ],
           ),
-        )
+        ),
+        if (widget.model.link != null) SizedBox(height: 16.h),
+        if (widget.model.link != null)
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: const Color(0xffFF7A00),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Link',
+                  style: TextStyle(
+                    fontSize: 16.h,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 6.h),
+                InkWell(
+                  onTap: _launchUrl,
+                  child: Text(
+                    widget.model.link!,
+                    style: TextStyle(
+                      fontSize: 13.h,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
+}
+
+Future<void> _launchUrl() async {
+  final Uri url = Uri.parse(
+      'https://kidshealth.org/en/parents/pregnancy-calendar-intro.html#:~:text=A%20pregnancy%20is%20divided%20into,the%20end%20of%20the%20pregnancy');
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
+  }
+}
+
+Future<void> alertDialog(BuildContext context) async {
+  await Future.delayed(
+    const Duration(seconds: 2),
+  );
+  showDialog(
+    context: context,
+    builder: (context) {
+      return CupertinoAlertDialog(
+        title: const Text(
+          'Info',
+          style: TextStyle(
+            fontSize: 17,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+        content: const Text(
+          'Our app is informative with the purpose of entertainment and education',
+          style: TextStyle(
+            fontSize: 13,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          CupertinoDialogAction(
+            child: const Text(
+              'Ok',
+              style: TextStyle(
+                fontSize: 17,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

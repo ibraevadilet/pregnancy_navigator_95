@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pregnancy_navigator_95/helpers/app_all_images.dart';
 import 'package:pregnancy_navigator_95/screens/nav5_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Nav2Screen extends StatefulWidget {
   const Nav2Screen({super.key});
@@ -11,6 +13,12 @@ class Nav2Screen extends StatefulWidget {
 }
 
 class _Nav2ScreenState extends State<Nav2Screen> {
+  @override
+  void initState() {
+    alertDialog(context);
+    super.initState();
+  }
+
   int index = 1;
   @override
   Widget build(BuildContext context) {
@@ -201,7 +209,42 @@ class Index1Diet extends StatelessWidget {
           color: Color(0xff009DFF),
           thickness: 2,
         ),
-        SizedBox(height: 33.h),
+        SizedBox(height: 25.h),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xffFF7A00),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Link',
+                style: TextStyle(
+                  fontSize: 16.h,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 6.h),
+              InkWell(
+                onTap: _launchUrlOne,
+                child: Text(
+                  'https://health.gov/myhealthfinder/pregnancy/nutrition-and-physical-activity/eat-healthy-during-pregnancy-quick-tips',
+                  style: TextStyle(
+                    fontSize: 13.h,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.h),
       ],
     );
   }
@@ -319,7 +362,42 @@ class Index2Diet extends StatelessWidget {
           color: Color(0xff009DFF),
           thickness: 2,
         ),
-        SizedBox(height: 55.h),
+        SizedBox(height: 25.h),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xffFF7A00),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Link',
+                style: TextStyle(
+                  fontSize: 16.h,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 6.h),
+              InkWell(
+                onTap: _launchUrlOne,
+                child: Text(
+                  'https://health.gov/myhealthfinder/pregnancy/nutrition-and-physical-activity/eat-healthy-during-pregnancy-quick-tips',
+                  style: TextStyle(
+                    fontSize: 13.h,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.h),
       ],
     );
   }
@@ -463,7 +541,42 @@ class Index3Diet extends StatelessWidget {
           color: Color(0xff009DFF),
           thickness: 2,
         ),
-        SizedBox(height: 55.h),
+        SizedBox(height: 25.h),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xffFF7A00),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Link',
+                style: TextStyle(
+                  fontSize: 16.h,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 6.h),
+              InkWell(
+                onTap: _launchUrlOne,
+                child: Text(
+                  'https://health.gov/myhealthfinder/pregnancy/nutrition-and-physical-activity/eat-healthy-during-pregnancy-quick-tips',
+                  style: TextStyle(
+                    fontSize: 13.h,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.h),
       ],
     );
   }
@@ -510,4 +623,59 @@ class DietContainer extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _launchUrlOne() async {
+  final Uri url = Uri.parse(
+      'https://health.gov/myhealthfinder/pregnancy/nutrition-and-physical-activity/eat-healthy-during-pregnancy-quick-tips');
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
+  }
+}
+
+Future<void> alertDialog(BuildContext context) async {
+  await Future.delayed(
+    const Duration(seconds: 2),
+  );
+  showDialog(
+    context: context,
+    builder: (context) {
+      return CupertinoAlertDialog(
+        title: const Text(
+          'Info',
+          style: TextStyle(
+            fontSize: 17,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+        content: const Text(
+          'Our app is informative with the purpose of entertainment and education',
+          style: TextStyle(
+            fontSize: 13,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          CupertinoDialogAction(
+            child: const Text(
+              'Ok',
+              style: TextStyle(
+                fontSize: 17,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

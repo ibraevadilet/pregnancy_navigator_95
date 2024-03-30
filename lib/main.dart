@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pregnancy_navigator_95/helpers/afagsd.dart';
 import 'package:pregnancy_navigator_95/screens/logo_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 late final SharedPreferences prefs;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
