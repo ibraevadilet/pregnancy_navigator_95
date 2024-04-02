@@ -1,12 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
+import 'package:apphud/apphud.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pregnancy_navigator_95/helpers/afagsd.dart';
 import 'package:pregnancy_navigator_95/helpers/app_all_images.dart';
 import 'package:pregnancy_navigator_95/main.dart';
 import 'package:pregnancy_navigator_95/screens/nav_bar_screen.dart';
@@ -21,18 +18,6 @@ class GoBuyScreen extends StatefulWidget {
 }
 
 class _GoBuyScreenState extends State<GoBuyScreen> {
-  Future<void> afafasfafafafsasfgadgfh() async {
-    final learAdaPaywall =
-        await Dfsdfasdfaafas().jhkgjfhdgsbfng('placement_95');
-    if (learAdaPaywall == null) return;
-    final learAdaProducts =
-        await Dfsdfasdfaafas().hgfhdgsbfngmh(learAdaPaywall);
-    if (learAdaProducts == null) return;
-    if (kDebugMode) log('learAda');
-
-    await Dfsdfasdfaafas().khgjfhdgsdhfjgh(learAdaProducts.first);
-  }
-
   bool asfaf = false;
   @override
   Widget build(BuildContext context) {
@@ -136,19 +121,75 @@ class _GoBuyScreenState extends State<GoBuyScreen> {
                     setState(() {
                       asfaf = true;
                     });
-                    await afafasfafafafsasfgadgfh();
-                    final hasPremiumStatusSmartTrader =
-                        await Dfsdfasdfaafas().liukytjrhgsdv();
-                    if (hasPremiumStatusSmartTrader) {
-                      await prefs.setBool('isBuy', true);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const NavBarScreen(),
-                        ),
-                        (route) => false,
-                      );
-                    }
+
+                    final apphudPaywalls = await Apphud.paywalls();
+                    print(apphudPaywalls);
+                    await Apphud.purchase(
+                      product: apphudPaywalls?.paywalls.first.products?.first,
+                    ).whenComplete(
+                      () async {
+                        if (await Apphud.hasPremiumAccess() ||
+                            await Apphud.hasActiveSubscription()) {
+                          final hasPremiumAccess =
+                              await Apphud.hasPremiumAccess();
+                          final hasActiveSubscription =
+                              await Apphud.hasActiveSubscription();
+                          if (hasPremiumAccess || hasActiveSubscription) {
+                            await prefs.setBool('isBuy', true);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  CupertinoAlertDialog(
+                                title: const Text('Success!'),
+                                content: const Text(
+                                    'Your purchase has been restored!'),
+                                actions: [
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => const NavBarScreen(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    },
+                                    child: const Text('Ok'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  CupertinoAlertDialog(
+                                title: const Text('Restore purchase'),
+                                content: const Text(
+                                    'Your purchase is not found. Write to support: https://forms.gle/DxVmvU8os5dQGSVB7'),
+                                actions: [
+                                  CupertinoDialogAction(
+                                    isDefaultAction: true,
+                                    onPressed: () =>
+                                        {Navigator.of(context).pop()},
+                                    child: const Text('Ok'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const NavBarScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        }
+                      },
+                    );
                     setState(() {
                       asfaf = false;
                     });

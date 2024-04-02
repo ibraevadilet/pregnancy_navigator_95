@@ -1,16 +1,17 @@
+import 'package:apphud/apphud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pregnancy_navigator_95/helpers/afagsd.dart';
 import 'package:pregnancy_navigator_95/screens/logo_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 late final SharedPreferences prefs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   prefs = await SharedPreferences.getInstance();
-  await Dfsdfasdfaafas().sdgdgbfhdsg();
+  await Apphud.start(apiKey: 'app_irXbxpy572NZMiG73dYx5G5qaFvbXh');
   runApp(const PrNavigatorApp());
 }
 
